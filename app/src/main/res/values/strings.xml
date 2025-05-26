@@ -1,3 +1,3 @@
 <resources>
-    <string name="app_name">Personal Budgetting Corp</string>
+    <string name="app_name" translatable="false">Personal Budgetting Corp</string>
 </resources>
