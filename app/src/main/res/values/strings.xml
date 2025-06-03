@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name" translatable="false">Personal Budgetting Corp</string>
+    <string name="home">Home</string>
+    <string name="statistics">Statistics</string>
+    <string name="categories">Categories</string>
+    <string name="expenses">Expenses</string>
+    <string name="profile">Profile</string>
+    <string-array name="currency_options">
+        <item>ZAR (South African Rand)</item>
+        <item>USD (US Dollar)</item>
+        <item>EUR (Euro)</item>
+    </string-array>
 </resources>

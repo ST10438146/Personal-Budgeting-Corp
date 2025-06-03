@@ -3,4 +3,5 @@
     <item name="password" type="id"/>
     <item name="login" type="id"/>
     <item name="Register" type="id"/>
+
 </resources>

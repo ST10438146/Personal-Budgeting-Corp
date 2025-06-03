@@ -568,12 +568,12 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddExpense"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="69dp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="100dp"
         android:src="@drawable/ic_add"
         app:backgroundTint="@color/fab_background"
-        app:tint="@android:color/white"
-        app:elevation="8dp" />
+        app:elevation="8dp"
+        app:tint="@android:color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
