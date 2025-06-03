@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -20,4 +20,35 @@
     <color name="brown">#FFA52A2A</color>
     <color name="cyan">#FF00FFFF</color>
     <color name="magenta">#FFFF00FF</color>
+
+    <color name="app_background_dark_purple">#FF2B0058</color>
+    <color name="top_card_purple">#FF6A00AB</color>
+    <color name="button_inactive_background">#FF4A0077</color>
+    <color name="accent_green">#FF00FFB7</color>
+    <color name="bottom_nav_selected_item">@color/accent_green</color>
+    <color name="bottom_nav_item_color">#FF4F2E7D</color>
+
+
+    <!-- Budget Tracker Colors -->
+    <color name="primary_gradient_start">#6C63FF</color>
+    <color name="primary_gradient_end">#4A4A4A</color>
+    <color name="card_background">#3A3A3A</color>
+    <color name="dark_card_background">#2C2C2C</color>
+    <color name="transaction_card_background">#3A3A3A</color>
+
+    <!-- Status Colors -->
+    <color name="income_color">#4CAF50</color>
+    <color name="expense_color">#FF5722</color>
+    <color name="success_color">#4CAF50</color>
+    <color name="warning_color">#FF9800</color>
+    <color name="danger_color">#F44336</color>
+
+    <!-- UI Elements -->
+    <color name="progress_color">#4CAF50</color>
+    <color name="progress_background">#555555</color>
+    <color name="fab_background">#6C63FF</color>
+
+    <!-- Bottom Navigation -->
+    <color name="bottom_nav_selected">#6C63FF</color>
+    <color name="bottom_nav_unselected">#888888</color>
 </resources>
