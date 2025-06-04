@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/activity_settings.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -27,22 +28,40 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Currency (Display Only - Not Implemented)"
+        android:text="Currency"
         android:textSize="16sp"
         android:layout_marginTop="16dp"/>
 
     <Spinner
         android:id="@+id/spinnerCurrency"
-        android:layout_width="373dp"
-        android:layout_height="56dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:layout_marginBottom="16dp"
         android:entries="@array/currency_options" />
 
     <Button
-        android:id="@+id/btnSetMonthlyBudget"
+        android:id="@+id/btnSetSpendingGoals"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Set Monthly Budget Goal"
+        android:text="Set Spending Goals"
         android:layout_marginTop="24dp"/>
+
+    <!-- TextViews to display current goals -->
+    <TextView
+        android:id="@+id/tvCurrentMinGoal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Current Min Goal: Not set"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tvCurrentMaxGoal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Current Max Goal: Not set"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"/>
 
 </LinearLayout>

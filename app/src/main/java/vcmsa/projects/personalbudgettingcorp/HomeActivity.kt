@@ -103,8 +103,16 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         binding.fabAddExpense.setOnClickListener {
             val intent = Intent(this, AddExpenseActivity::class.java)
-            // Pass's User ID if AddExpenseActivity still expects it,
-            startActivity(intent)
+            val currentUserId = auth.currentUser?.uid // Gets the current user's ID
+
+            if (currentUserId != null && currentUserId.isNotEmpty()) {
+                intent.putExtra("USER_ID_KEY", currentUserId) // Adds the User ID to the Intent
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Error: User not identified. Please try logging in again.", Toast.LENGTH_LONG).show()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
         }
 
         binding.ivProfile.setOnClickListener {
