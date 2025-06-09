@@ -40,9 +40,7 @@ class AddExpenseActivity : AppCompatActivity() {
     // ActivityResultLauncher for requesting permission
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
 
-    // val expense: String = "Default Value" // This was problematic and should be removed if not used correctly
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddExpenseBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -115,9 +113,7 @@ class AddExpenseActivity : AppCompatActivity() {
                 openGallery()
             }
             shouldShowRequestPermissionRationale(permission) -> {
-                // Show an explanation to the user *asynchronously*
-                // For simplicity here, we'll just request directly.
-                // In a real app, show a dialog explaining why you need the permission.
+                // Shows an explanation to the user *asynchronously*
                 Toast.makeText(this, "Storage permission is needed to select images.", Toast.LENGTH_LONG).show()
                 requestPermissionLauncher.launch(permission)
             }
@@ -141,9 +137,9 @@ class AddExpenseActivity : AppCompatActivity() {
         if (!validateInput(amountStr, category)) {
             return
         }
-        val amount = amountStr.toDouble() // Validation ensures this is safe
+        val amount = amountStr.toDouble()
 
-        // Show progress indicator (e.g., ProgressBar)
+        // Shows progress indicator (ProgressBar)
         Toast.makeText(this, "Saving expense...", Toast.LENGTH_SHORT).show()
         binding.btnSaveExpense.isEnabled = false // Disable button to prevent multiple clicks
 
@@ -171,11 +167,11 @@ class AddExpenseActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.e("AddExpenseActivity", "Image upload failed: ${e.message}", e)
                 Toast.makeText(this, "Image upload failed: ${e.message}", Toast.LENGTH_LONG).show()
-                binding.btnSaveExpense.isEnabled = true // Re-enable button
+                binding.btnSaveExpense.isEnabled = true // Re-enables button
             }
             .addOnProgressListener { snapshot ->
                 val progress = (100.0 * snapshot.bytesTransferred / snapshot.totalByteCount)
-                // Update progress UI if you have one
+                // Updates progress UI
                 Log.d("AddExpenseActivity", "Upload is $progress% done")
             }
     }
@@ -187,7 +183,7 @@ class AddExpenseActivity : AppCompatActivity() {
             "category" to category,
             "description" to description,
             "timestamp" to System.currentTimeMillis(),
-            "imageUrl" to imageUrl // Can be null if no image
+            "imageUrl" to imageUrl
         )
 
         if (this::userId.isInitialized && userId.isNotEmpty()) {
@@ -202,14 +198,14 @@ class AddExpenseActivity : AppCompatActivity() {
                 .addOnFailureListener { e ->
                     Log.e("AddExpenseActivity", "Error saving expense to Firestore: ${e.message}", e)
                     Toast.makeText(this, "Error saving expense: ${e.message}", Toast.LENGTH_LONG).show()
-                    binding.btnSaveExpense.isEnabled = true // Re-enable button
+                    binding.btnSaveExpense.isEnabled = true // Re-enables button
                 }
 
         }
         else {
             Toast.makeText(this, "Error: User ID is missing. Cannot save expense.", Toast.LENGTH_LONG).show()
             Log.e("AddExpenseActivity", "User ID was empty or not initialized during saveExpenseDataToFirestore.")
-            binding.btnSaveExpense.isEnabled = true // Re-enable button
+            binding.btnSaveExpense.isEnabled = true // Re-enables button
         }
     }
 
@@ -232,7 +228,7 @@ class AddExpenseActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed() // More modern way
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 }

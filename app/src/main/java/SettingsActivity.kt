@@ -88,7 +88,7 @@ class SettingsActivity : AppCompatActivity() {
                 .addOnSuccessListener { document ->
                     if (document != null && document.exists()) {
                         val minGoal = document.getDouble("minSpendingGoal")
-                        val maxGoal = document.getDouble("maxSpendingGoal") // This was likely your 'monthlyGoal'
+                        val maxGoal = document.getDouble("maxSpendingGoal")
 
                         tvCurrentMinGoal.text = "Current Min Goal: ${minGoal?.let { "R%.2f".format(it) } ?: "Not set"}"
                         tvCurrentMaxGoal.text = "Current Max Goal: ${maxGoal?.let { "R%.2f".format(it) } ?: "Not set"}"
@@ -224,7 +224,7 @@ class SettingsActivity : AppCompatActivity() {
         goalsData["maxSpendingGoal"] = maxGoal
 
         db.collection("users").document(uid).collection("settings").document("budget")
-            .set(goalsData, SetOptions.merge()) // Use merge to update only these fields
+            .set(goalsData, SetOptions.merge()) // Uses merge to update only these fields
             .addOnSuccessListener {
                 Toast.makeText(this, "Spending goals saved!", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "Spending goals successfully written!")

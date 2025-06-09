@@ -34,8 +34,8 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var db: FirebaseFirestore
     private lateinit var database: FirebaseDatabase
 
-    private var totalBudget = 0.0 // Default to 0, will be fetched
-    private var totalExpense = 0.0 // Default to 0, will be fetched/calculated
+    private var totalBudget = 0.0 // Default to 0
+    private var totalExpense = 0.0 // Default to 0
     private var selectedTimeFilter = "Monthly" // Default to Monthly to align with budget
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
-        database = FirebaseDatabase.getInstance() // Not used
+        database = FirebaseDatabase.getInstance()
 
         val currentUser = auth.currentUser
         if (currentUser == null) {
@@ -79,7 +79,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun setupBottomNavigation() {
         // Inflates the menu for the BottomNavigationView
-        binding.bottomNavigation.inflateMenu(R.menu.bottom_nav_menu) // Ensure you have this menu file
+        binding.bottomNavigation.inflateMenu(R.menu.bottom_nav_menu)
         binding.bottomNavigation.setOnNavigationItemSelectedListener(this)
         binding.bottomNavigation.selectedItemId = R.id.nav_home // Sets Home as selected
     }
@@ -143,7 +143,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding.tvRemainingBudget.text = "R${String.format(Locale.US, "%.2f", remaining)}"
 
         val percentage = if (totalBudget > 0) ((totalExpense / totalBudget) * 100).toInt() else 0
-        binding.progressBudget.progress = percentage.coerceIn(0, 100) // Ensure progress is within 0-100
+        binding.progressBudget.progress = percentage.coerceIn(0, 100) // Ensures progress is within 0-100
         binding.tvProgressPercentage.text = "$percentage%"
 
         val statusMessage: String
@@ -197,7 +197,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                             }
                         }
                         totalExpense = filteredTotalExpense // Updates the main totalExpense
-                        updateBudgetDisplay() // Refresh's UI elements for budget overview
+                        updateBudgetDisplay() // Refreshes UI elements for budget overview
                         // binding.progressBarHome.visibility = View.GONE
                     }
                     .addOnFailureListener { e ->
@@ -268,7 +268,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         // For "Quick Stats Card"
         val oneWeekAgo = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, -7) }.timeInMillis
         db.collection("users").document(userId).collection("expenses")
-            .whereEqualTo("category", "Transport") // Assuming "Transport" is a category
+            .whereEqualTo("category", "Transport")
             .whereGreaterThanOrEqualTo("timestamp", oneWeekAgo)
             .get()
             .addOnSuccessListener { documents ->
@@ -285,7 +285,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding.tvFoodLastWeek.text = "R..."
 
         // For "Recent Transactions"
-        // Fetch's the latest 3-5 transactions.
+        // Fetches the latest 3-5 transactions.
         db.collection("users").document(userId).collection("expenses")
             .orderBy("timestamp", com.google.firebase.firestore.Query.Direction.DESCENDING)
             .limit(3) // Gets latest 3 transactions
@@ -295,7 +295,6 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     // Handle no transactions: show a message in the recent transactions area
                 } else {
                     // Manually updates the static CardViews if there are transactions. IDs.
-                    // Example for the first transaction card (assuming you add IDs):
                     // if (documents.size() > 0) {
                     // val firstDoc = documents.documents[0].toObject(Expense::class.java)
                     // binding.tvTransaction1Category.text = firstDoc?.category
@@ -307,8 +306,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     // binding.tvTransaction1Amount.setTextColor(ContextCompat.getColor(this, R.color.expense_color))
                     // }
                     // }
-                    // ... and so on for other transaction cards.
-                    // A RecyclerView is highly recommended here for dynamic content.
+
                 }
             }
             .addOnFailureListener { Log.e("HomeActivity", "Error fetching recent transactions", it) }
@@ -375,7 +373,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onResume() {
         super.onResume()
-        // Refresh's data when returning to HomeActivity
+        // Refreshes data when returning to HomeActivity
         // or changing budget settings.
         applyExpenseFilter(selectedTimeFilter)
         fetchQuickStats()

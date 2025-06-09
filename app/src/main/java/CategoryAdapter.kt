@@ -40,7 +40,7 @@ class CategoryAdapter(private var categories: List<Category>) :
             holder.tvCategoryLimit.visibility = View.VISIBLE
         } else {
             holder.tvCategoryLimit.text = "No Limit Set"
-            // Or hide it: holder.tvCategoryLimit.visibility = View.GONE
+            //holder.tvCategoryLimit.visibility = View.GONE
         }
     }
 
@@ -48,6 +48,6 @@ class CategoryAdapter(private var categories: List<Category>) :
 
     fun updateCategories(newCategories: List<Category>) {
         this.categories = newCategories
-        notifyDataSetChanged() // Or use DiffUtil for better performance
+        notifyDataSetChanged()
     }
 }

@@ -21,7 +21,7 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
+        // Initializes Firebase Auth
         auth = FirebaseAuth.getInstance()
 
         setupClickListeners()
@@ -33,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.tvLogin.setOnClickListener {
-            finish() // Go back to login activity
+            finish() // Goes back to login activity
         }
     }
 
@@ -42,16 +42,16 @@ class RegisterActivity : AppCompatActivity() {
         val password = binding.etPassword.text.toString().trim()
         val confirmPassword = binding.etConfirmPassword.text.toString().trim()
 
-        // Validate input
+        // Validates input
         if (!validateInput(email, password, confirmPassword)) {
             return
         }
 
-        // Show progress bar
+        // Shows progress bar
         binding.progressBar.visibility = View.VISIBLE
         binding.btnRegister.isEnabled = false
 
-        // Create user with Firebase
+        // Creates user with Firebase
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 binding.progressBar.visibility = View.GONE

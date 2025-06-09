@@ -192,13 +192,13 @@ class StatisticsActivity : AppCompatActivity() {
         tvNoData.visibility = View.GONE
         barChart.clear() // Clears previous data and limit lines
 
-        // Fetch's goals first
+        // Fetches goals first
         fetchBudgetGoals { goals ->
             currentMinGoal = goals?.minGoal
             currentMaxGoal = goals?.maxGoal
             Log.d(TAG, "Fetched goals: Min = $currentMinGoal, Max = $currentMaxGoal")
 
-            // Then fetch's expenses
+            // Then fetches expenses
             fetchExpensesForPeriod(startDate, endDate) { expenses ->
                 progressBar.visibility = View.GONE
                 if (expenses.isEmpty()) {
@@ -326,7 +326,7 @@ class StatisticsActivity : AppCompatActivity() {
             minLimitLine.enableDashedLine(10f, 10f, 0f)
             minLimitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
             minLimitLine.textSize = 10f
-            minLimitLine.lineColor = Color.GREEN // Choose appropriate color
+            minLimitLine.lineColor = Color.GREEN // Chooses appropriate color
             barChart.axisLeft.addLimitLine(minLimitLine)
         }
 
@@ -336,11 +336,11 @@ class StatisticsActivity : AppCompatActivity() {
             maxLimitLine.enableDashedLine(10f, 10f, 0f)
             maxLimitLine.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
             maxLimitLine.textSize = 10f
-            maxLimitLine.lineColor = Color.RED // Choose appropriate color
+            maxLimitLine.lineColor = Color.RED // Chooses appropriate color
             barChart.axisLeft.addLimitLine(maxLimitLine)
         }
 
-        // Ensure the Y-axis accommodates the data and limit lines
+        // Ensures the Y-axis accommodates the data and limit lines
         var yAxisMax = spendingPerCategory.maxOfOrNull { it.second }?.toFloat() ?: 0f
         currentMaxGoal?.let { yAxisMax = kotlin.math.max(yAxisMax, it.toFloat()) }
         barChart.axisLeft.axisMaximum = yAxisMax * 1.1f // Add some padding

@@ -18,7 +18,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.firestore.Query
 import vcmsa.projects.personalbudgettingcorp.adapters.CategoryAdapter
-import vcmsa.projects.personalbudgettingcorp.databinding.DialogAddCategoryBinding // Import view binding for dialog
+import vcmsa.projects.personalbudgettingcorp.databinding.DialogAddCategoryBinding
 
 class CategoriesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCategoriesBinding
@@ -60,10 +60,9 @@ class CategoriesActivity : AppCompatActivity() {
         binding.categoriesRecyclerView.adapter = categoryAdapter
 
         categoryAdapter.onItemClick = { category ->
-            // Handle category click: e.g., open edit/delete dialog
+            // Handles category click: e.g., open edit/delete dialog
             Toast.makeText(this, "Clicked: ${category.name}", Toast.LENGTH_SHORT).show()
-            // showEditDeleteCategoryDialog(category) // Implement this for edit/delete
-        }
+            }
     }
 
     private fun setupFab() {
@@ -74,13 +73,13 @@ class CategoriesActivity : AppCompatActivity() {
 
     private fun showAddCategoryDialog() {
         val dialogBinding = DialogAddCategoryBinding.inflate(LayoutInflater.from(this))
-        // val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_category, null)
-        // val etCategoryName = dialogView.findViewById<EditText>(R.id.etDialogCategoryName)
-        // val etCategoryLimit = dialogView.findViewById<EditText>(R.id.etDialogCategoryLimit)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_category, null)
+        val etCategoryName = dialogView.findViewById<EditText>(R.id.etDialogCategoryName)
+        val etCategoryLimit = dialogView.findViewById<EditText>(R.id.etDialogCategoryLimit)
 
         AlertDialog.Builder(this)
             .setTitle("Add New Category")
-            .setView(dialogBinding.root) // Use dialogBinding.root
+            .setView(dialogBinding.root) // Uses dialogBinding.root
             .setPositiveButton("Add") { dialog, _ ->
                 val name = dialogBinding.etDialogCategoryName.text.toString().trim()
                 val limitStr = dialogBinding.etDialogCategoryLimit.text.toString().trim()
@@ -107,7 +106,7 @@ class CategoriesActivity : AppCompatActivity() {
                 .add(newCategory) // Firestore generates ID
                 .addOnSuccessListener {
                     Toast.makeText(this, "Category '$name' added.", Toast.LENGTH_SHORT).show()
-                    loadCategories() // Refresh the list
+                    loadCategories() // Refreshes the list
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "Error adding category: ${e.message}", Toast.LENGTH_LONG).show()
@@ -119,13 +118,12 @@ class CategoriesActivity : AppCompatActivity() {
     private fun loadCategories() {
         userId?.let { uid ->
             db.collection("users").document(uid).collection("categories")
-                .orderBy("name", Query.Direction.ASCENDING) // Optional: order by name
+                .orderBy("name", Query.Direction.ASCENDING)//Order by name
                 .get()
                 .addOnSuccessListener { documents ->
                     categoryList.clear()
                     for (document in documents) {
                         val category = document.toObject(Category::class.java)
-                        // category.id = document.id // If you have an 'id' field in Category data class annotated with @DocumentId
                         categoryList.add(category)
                     }
                     categoryAdapter.updateCategories(categoryList)

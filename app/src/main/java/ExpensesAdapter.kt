@@ -18,7 +18,7 @@ class ExpensesAdapter(
     private var expenses: List<Expense>
 ) : RecyclerView.Adapter<ExpensesAdapter.ExpenseViewHolder>() {
 
-    // Listener for item clicks (optional, for viewing full image or details)
+    // Listener for item clicks ( for viewing full image or details)
     var onItemClick: ((Expense) -> Unit)? = null
 
     inner class ExpenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,7 +30,7 @@ class ExpensesAdapter(
 
         init {
             itemView.setOnClickListener {
-                // Ensure adapterPosition is valid
+                // Ensures adapterPosition is valid
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     onItemClick?.invoke(expenses[adapterPosition])
                 }
@@ -56,8 +56,8 @@ class ExpensesAdapter(
             holder.ivReceiptThumbnail.visibility = View.VISIBLE
             Glide.with(holder.itemView.context)
                 .load(expense.imageUrl)
-                .placeholder(R.drawable.ic_placeholder_image) // Replace with your placeholder
-                .error(R.drawable.ic_placeholder_image) // Replace with an error image
+                .placeholder(R.drawable.ic_placeholder_image) // Replaces with your placeholder
+                .error(R.drawable.ic_placeholder_image) // Replaces with an error image
                 .centerCrop()
                 .into(holder.ivReceiptThumbnail)
         } else {
@@ -74,6 +74,6 @@ class ExpensesAdapter(
 
     fun updateExpenses(newExpenses: List<Expense>) {
         this.expenses = newExpenses
-        notifyDataSetChanged() // For simplicity. Consider DiffUtil for better performance.
+        notifyDataSetChanged()
     }
 }

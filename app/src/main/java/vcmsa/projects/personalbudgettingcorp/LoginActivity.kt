@@ -21,10 +21,10 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
+        // Initializes Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        // Check if user is already logged in
+        // Checks if user is already logged in
         if (auth.currentUser != null) {
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
@@ -48,16 +48,16 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
 
-        // Validate input
+        // Validates input
         if (!validateInput(email, password)) {
             return
         }
 
-        // Show progress bar
+        // Shows progress bar
         binding.progressBar.visibility = View.VISIBLE
         binding.btnLogin.isEnabled = false
 
-        // Sign in with Firebase
+        // Signs in with Firebase
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 binding.progressBar.visibility = View.GONE

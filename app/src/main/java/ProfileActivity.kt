@@ -89,11 +89,10 @@ class ProfileActivity : AppCompatActivity() {
                     binding.etConfirmNewPassword.text?.clear()
                 } else {
                     Log.e("ProfileActivity", "Password update failed", task.exception)
-                    // Handle specific errors, e.g., re-authentication needed
+                    // Handles specific errors, e.g., re-authentication needed
                     if (task.exception?.message?.contains("RECENT_LOGIN_REQUIRED") == true) {
                         Toast.makeText(this, "Re-authentication required to change password. Please log out and log back in.", Toast.LENGTH_LONG).show()
-                        // Ideally, you would prompt for current password and re-authenticate.
-                        // For simplicity here, we ask user to re-login.
+
                     } else {
                         Toast.makeText(this, "Failed to update password: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }

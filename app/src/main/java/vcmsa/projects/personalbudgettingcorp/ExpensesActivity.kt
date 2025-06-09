@@ -62,9 +62,9 @@ class ExpensesActivity : AppCompatActivity() {
     }
 
     private fun loadExpenses() {
-        binding.progressBarExpenses.visibility = View.VISIBLE // Show progress bar
-        binding.tvNoExpenses.visibility = View.GONE       // Hide no expenses text
-        binding.recyclerExpenses.visibility = View.GONE    // Hide RecyclerView
+        binding.progressBarExpenses.visibility = View.VISIBLE // Shows progress bar
+        binding.tvNoExpenses.visibility = View.GONE       // Hides no expenses text
+        binding.recyclerExpenses.visibility = View.GONE    // Hides RecyclerView
 
         userId?.let { uid ->
             db.collection("users").document(uid).collection("expenses")
@@ -77,13 +77,13 @@ class ExpensesActivity : AppCompatActivity() {
                         expenseList.add(expense)
                     }
                     expensesAdapter.updateExpenses(expenseList)
-                    binding.progressBarExpenses.visibility = View.GONE // Hide progress bar
-                    toggleNoExpensesView() // Update visibility of RecyclerView and tvNoExpenses
+                    binding.progressBarExpenses.visibility = View.GONE // Hides progress bar
+                    toggleNoExpensesView() // Updates visibility of RecyclerView and tvNoExpenses
                 }
                 .addOnFailureListener { e ->
                     binding.progressBarExpenses.visibility = View.GONE // Hide progress bar
                     binding.tvNoExpenses.text = "Error loading expenses: ${e.localizedMessage}"
-                    binding.tvNoExpenses.visibility = View.VISIBLE // Show error message
+                    binding.tvNoExpenses.visibility = View.VISIBLE // Shows error message
                     binding.recyclerExpenses.visibility = View.GONE
                     Toast.makeText(this, "Error loading expenses: ${e.message}", Toast.LENGTH_LONG).show()
                     Log.e("ExpensesActivity", "Error loading expenses", e)
@@ -98,8 +98,7 @@ class ExpensesActivity : AppCompatActivity() {
 
     private fun toggleNoExpensesView() {
         if (expenseList.isEmpty()) {
-            // If tvNoExpenses is already showing an error, don't overwrite it with "No expenses"
-            if (binding.tvNoExpenses.visibility == View.GONE) { // Only set "No expenses" if not already showing an error
+                if (binding.tvNoExpenses.visibility == View.GONE) { // Only set "No expenses" if not already showing an error
                 binding.tvNoExpenses.text = "No expenses recorded yet."
                 binding.tvNoExpenses.visibility = View.VISIBLE
             }
